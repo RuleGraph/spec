@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rulegraph.org/schema/lawcard.schema.json",
+  "title": "RuleGraph LawCard",
+  "type": "object",
+  "required": ["id", "version", "type", "title", "kind", "equations", "parameters", "validity", "invariants"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^rg:law/[a-z0-9_.-]+\\.v[0-9]+$" },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "type": { "const": "rg:LawCard" },
+    "title": { "type": "string", "minLength": 1 },
+    "kind": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "equations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["machine"],
+        "properties": {
+          "machine": { "type": "string", "minLength": 1 },
+          "tex": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["value", "unit"],
+        "properties": {
+          "value": { "type": "number" },
+          "unit": { "type": "string" },
+          "sigma": { "type": "number" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "validity": {
+      "type": "object",
+      "properties": {
+        "regimes": { "type": "object" },
+        "assumptions": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": true
+    },
+    "invariants": {
+      "type": "object",
+      "required": ["conserves"],
+      "properties": {
+        "conserves": {
+          "type": "array",
+          "items": { "enum": ["Energy", "LinearMomentum", "AngularMomentum"] },
+          "minItems": 1
+        },
+        "driftBudget": {
+          "type": "object",
+          "properties": {
+            "Energy": { "type": "object", "properties": { "rel": { "type": "number" } }, "additionalProperties": false },
+            "LinearMomentum": { "type": "object", "properties": { "rel": { "type": "number" } }, "additionalProperties": false },
+            "AngularMomentum": { "type": "object", "properties": { "rel": { "type": "number" } }, "additionalProperties": false }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "stabilityModel": {
+      "type": "object",
+      "properties": {
+        "cflHint": { "type": "number" },
+        "dtMaxRuleMachine": { "type": "string" },
+        "dtMaxRuleTex": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "testVectors": { "type": "array" },
+    "provenance": { "type": "object" },
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+  },
+  "additionalProperties": true
+}
