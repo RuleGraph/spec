@@ -23,7 +23,5 @@ Authoritative context and JSON Schemas for RuleGraph’s data model.
 - `schema/world.schema.json` — minimal World/Frame/Body model for v0.
 - `schema/lawcard.schema.json` — LawCard with equations/validity/invariants/stability/provenance/hash.
 
-These are **minimum viable**; expansions happen via RFCs in issues.
-
 ---
 
