@@ -1,27 +1,45 @@
-# RuleGraph Spec
+# RuleGraph Spec Bundle
 
-Authoritative context and JSON Schemas for RuleGraph’s data model.
+This folder contains **versioned, frozen specifications** for RuleGraph. Schemas are meant
+to be resolved **offline** by tools; the `$id` URLs are identifiers, not network fetches (soon).
 
-- JSON-LD contexts (prefixes, types) under `contexts/`
-- Validation schemas (Draft 2020-12) under `schema/`
+## What lives here
 
-**License:** Apache-2.0.
+- `rg-ast-v1/` — canonical expression grammar (AST) for equations.
+- `lawcard-v0.1/` — LawCard schema (references AST v1).
+- `world-v0.1/` — World file schema (frames, entities, dynamics, config). *(optional now)*
+- `lockfile-v0.1/` — Lockfile schema for run provenance. *(optional now)*
+- `next/` — drafts and RFCs (mutable).
+- `registry.json` — maps schema `$id` → local path (for offline validation).
+- `VERSION` / `CHANGELOG.md` — bundle version and human-readable changes.
 
----
+Each versioned directory (`*-vX[.Y]/`) contains:
+- `schema/*.json` — the JSON Schema (Draft 2020-12).
+- `examples/*.json` — small, valid examples.
+- `tests/invalid/*.json` — examples that **must fail** validation.
+- `docs/*.md` — short normative guidance (authoring notes, canonicalization rules).
 
-## Namespaces
+## Versioning & Freezing
 
-- `rg:` → `https://rulegraph.org/schema#`
-- `unit:` → `https://qudt.org/vocab/unit/`
-- `prov:` → `http://www.w3.org/ns/prov#`
+- We use **SemVer** for schemas:
+  - **MAJOR** — breaking validator/semantics
+  - **MINOR** — backward-compatible additions
+  - **PATCH** — non-functional clarifications
+- Versioned directories are **immutable** after release. Any change → a **new dir** (e.g., `lawcard-v0.2/`).
+- The whole bundle is versioned by `spec/VERSION` and tagged as `spec-vX.Y.Z`.
 
----
+## Canonicalization & Hashing
 
-## Artifacts
+LawCards include a `sha256` computed over **canonical JSON** with the `sha256` field removed.
+Canonicalization rules live in authoring tools (see the `lawcards` repo).  
+AST canonicalization: rewrite `div(a,b) → mul(a, pow(b,-1))`, prefer a single outer `neg`, flatten
+associative ops, and constant-fold simple literals.
 
-- `contexts/rulegraph-v1.jsonld` — minimal context for World / Frame / Body / LawCard.
-- `schema/world.schema.json` — minimal World/Frame/Body model for v0.
-- `schema/lawcard.schema.json` — LawCard with equations/validity/invariants/stability/provenance/hash.
+## Offline Validation
 
----
+Use the bundle validator (no network):
 
+```bash
+python spec/tools/spec_validate_all.py
+
+- Francis Bousquet
