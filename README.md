@@ -7,11 +7,7 @@ to be resolved **offline** by tools; the `$id` URLs are identifiers, not network
 
 - `rg-ast-v1/` — canonical expression grammar (AST) for equations.
 - `lawcard-v0.1/` — LawCard schema (references AST v1).
-- `world-v0.1/` — World file schema (frames, entities, dynamics, config). *(optional now)*
-- `lockfile-v0.1/` — Lockfile schema for run provenance. *(optional now)*
-- `next/` — drafts and RFCs (mutable).
 - `registry.json` — maps schema `$id` → local path (for offline validation).
-- `VERSION` / `CHANGELOG.md` — bundle version and human-readable changes.
 
 Each versioned directory (`*-vX[.Y]/`) contains:
 - `schema/*.json` — the JSON Schema (Draft 2020-12).
