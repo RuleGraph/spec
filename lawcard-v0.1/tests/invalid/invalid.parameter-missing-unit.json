@@ -1,0 +1,16 @@
+{
+  "id": "rg:law/example.param.bad",
+  "version": "0.1.0",
+  "type": "rg:LawCard",
+  "title": "Param missing unit",
+  "kind": ["rg:PairwiseLaw"],
+  "equations": [
+    { "machine": "F = k * x" }
+  ],
+  "parameters": {
+    "k": { "value": 100.0 }
+  },
+  "validity": { "assumptions": [] },
+  "invariants": { "conserves": ["Energy"] },
+  "provenance": {}
+}

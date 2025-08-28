@@ -1,0 +1,16 @@
+{
+  "id": "rg:law/example.ast.bad",
+  "version": "0.1.0",
+  "type": "rg:LawCard",
+  "title": "Bad AST shape",
+  "kind": ["rg:PairwiseLaw"],
+  "equations": [
+    { "ast": { "foo": {} } }
+  ],
+  "parameters": {
+    "x": { "value": 1, "unit": "unit:M" }
+  },
+  "validity": { "assumptions": [] },
+  "invariants": { "conserves": ["Energy"] },
+  "provenance": {}
+}

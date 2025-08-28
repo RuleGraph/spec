@@ -1,0 +1,6 @@
+{ "let": [ { "sym": "triple" },
+  { "call": { "fn": "dot", "args": [
+      { "sym": "a" },
+      { "call": { "fn": "cross", "args": [ { "sym": "b" }, { "sym": "c" } ] } }
+  ] } }
+] }

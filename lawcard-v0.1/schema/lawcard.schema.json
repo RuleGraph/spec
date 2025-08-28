@@ -1,0 +1,220 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rulegraph.org/spec/lawcard/v0.1/schema.json",
+  "title": "RuleGraph LawCard",
+  "type": "object",
+
+  "required": ["id", "version", "type", "title", "kind", "equations", "parameters", "validity", "invariants", "provenance"],
+
+  "properties": {
+    "@context": { "type": ["object", "string"] },
+
+    "id": { "type": "string", "minLength": 1 },
+    "version": { "type": "string", "minLength": 1 },
+    "type": { "type": "string", "const": "rg:LawCard" },
+    "title": { "type": "string", "minLength": 1 },
+
+    "kind": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+
+    "equations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "anyOf": [
+          { "required": ["machine"] },
+          { "required": ["ast"] }
+        ],
+
+        "properties": {
+          "name": { "type": "string" },
+          "machine": { "type": "string", "minLength": 1 },
+          "tex": { "type": "string" },
+          "ast": { "$ref": "https://rulegraph.org/spec/rg-ast/v1/schema.json#/$defs/Node" }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "parameters": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["value", "unit"],
+        "properties": {
+          "value": { "type": "number" },
+          "unit": { "type": "string", "minLength": 1 },
+          "sigma": { "type": "number" },
+          "dimension": {
+            "type": "object",
+            "properties": {
+              "L": { "type": "integer" },
+              "M": { "type": "integer" },
+              "T": { "type": "integer" },
+              "I": { "type": "integer" },
+              "Θ": { "type": "integer" },
+              "N": { "type": "integer" },
+              "J": { "type": "integer" }
+            },
+            "additionalProperties": false
+          },
+          "description": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "symbols": {
+      "type": "object",
+      "description": "Symbol metadata for variables used in equations.",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["kind", "unit", "dimension", "role"],
+        "properties": {
+          "kind": { "type": "string", "enum": ["scalar", "vector3", "vector", "matrix"] },
+          "unit": { "type": "string", "minLength": 1 },
+          "dimension": {
+            "type": "object",
+            "properties": {
+              "L": { "type": "integer" },
+              "M": { "type": "integer" },
+              "T": { "type": "integer" },
+              "I": { "type": "integer" },
+              "Θ": { "type": "integer" },
+              "N": { "type": "integer" },
+              "J": { "type": "integer" }
+            },
+            "additionalProperties": false
+          },
+          "role": { "type": "string", "enum": ["parameter", "state", "state-or-input", "intermediate", "output", "derived"] },
+          "shape": { "type": "array", "items": { "type": "integer", "minimum": 1 }, "minItems": 1 },
+          "derivedFrom": { "type": "array", "items": { "type": "string" } },
+          "description": { "type": "string" },
+          "note": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "validity": {
+      "type": "object",
+      "required": ["assumptions"],
+      "properties": {
+        "regimes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "desc": { "type": "string" },
+              "min": { "type": "number" },
+              "max": { "type": "number" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "assumptions": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+
+    "invariants": {
+      "type": "object",
+      "required": ["conserves"],
+      "properties": {
+        "conserves": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "driftBudget": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": { "rel": { "type": "number" } },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "stabilityModel": {
+      "type": "object",
+      "properties": {
+        "cflHint": { "type": "number" },
+        "dtMaxRuleMachine": { "type": "string" },
+        "dtMaxRuleTex": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+
+    "testVectors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "inputs", "expected"],
+        "properties": {
+          "name": { "type": "string" },
+          "inputs": {
+            "type": "object",
+            "additionalProperties": { "type": ["number", "integer", "string", "boolean"] }
+          },
+          "expected": {
+            "type": "object",
+            "properties": {
+              "period": {
+                "type": "object",
+                "properties": {
+                  "value": { "type": "number" },
+                  "unit": { "type": "string" }
+                },
+                "additionalProperties": false
+              },
+              "tolerance": {
+                "type": "object",
+                "properties": { "rel": { "type": "number" }, "abs": { "type": "number" } },
+                "additionalProperties": false
+              }
+            },
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "numericProfile": {
+      "type": "object",
+      "properties": {
+        "dtype": { "type": "string", "enum": ["float32", "float64"] },
+        "fma": { "type": "boolean" },
+        "order": { "type": "string", "enum": ["deterministic", "fast"] },
+        "rngSeed": { "type": ["integer", "null"] }
+      },
+      "additionalProperties": false
+    },
+
+    "provenance": { "type": "object" },
+
+    "signatures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "alg": { "type": "string" },
+          "identity": { "type": "string" },
+          "sig": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+
+  "patternProperties": {
+    "^x-": {}
+  },
+
+  "additionalProperties": false
+}

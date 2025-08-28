@@ -1,0 +1,17 @@
+{
+  "id": "rg:law/example.hash.bad",
+  "version": "0.1.0",
+  "type": "rg:LawCard",
+  "title": "Bad sha256 pattern",
+  "kind": ["rg:PairwiseLaw"],
+  "equations": [
+    { "machine": "y = x" }
+  ],
+  "parameters": {
+    "x": { "value": 1, "unit": "unit:M" }
+  },
+  "validity": { "assumptions": [] },
+  "invariants": { "conserves": ["Energy"] },
+  "provenance": {},
+  "sha256": "deadbeef"
+}

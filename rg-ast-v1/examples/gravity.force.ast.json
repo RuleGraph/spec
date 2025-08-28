@@ -1,0 +1,6 @@
+{ "let": [ { "sym": "F_vec" },
+  { "neg": { "mul": [
+    { "sym": "G" }, { "sym": "m1" }, { "sym": "m2" }, { "sym": "r_vec" },
+    { "pow": [ { "sym": "r" }, { "const": -3 } ] }
+  ] } }
+] }

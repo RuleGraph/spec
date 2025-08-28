@@ -1,0 +1,16 @@
+{
+  "id": "rg:law/example.eqn.bad",
+  "version": "0.1.0",
+  "type": "rg:LawCard",
+  "title": "Equation missing machine/ast",
+  "kind": ["rg:PairwiseLaw"],
+  "equations": [
+    { "tex": "y = x" }
+  ],
+  "parameters": {
+    "x": { "value": 1, "unit": "unit:M" }
+  },
+  "validity": { "assumptions": [] },
+  "invariants": { "conserves": ["Energy"] },
+  "provenance": {}
+}

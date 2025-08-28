@@ -1,0 +1,24 @@
+{
+  "id": "rg:law/example.symbols.bad",
+  "version": "0.1.0",
+  "type": "rg:LawCard",
+  "title": "Symbols unknown kind",
+  "kind": ["rg:PairwiseLaw"],
+  "equations": [
+    { "machine": "F = x" }
+  ],
+  "parameters": {
+    "x": { "value": 1, "unit": "unit:N" }
+  },
+  "symbols": {
+    "F_vec": {
+      "kind": "tensor4",
+      "unit": "unit:N",
+      "dimension": { "L": 1, "M": 1, "T": -2 },
+      "role": "output"
+    }
+  },
+  "validity": { "assumptions": [] },
+  "invariants": { "conserves": ["Energy"] },
+  "provenance": {}
+}
