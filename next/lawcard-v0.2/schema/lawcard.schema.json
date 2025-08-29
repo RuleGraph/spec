@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rulegraph.org/spec/lawcard-v0.2/schema.json",
+  "title": "RuleGraph LawCard v0.2",
+  "type": "object",
+
+  "required": ["id", "version", "type", "title", "kind", "equations", "parameters", "validity", "invariants"],
+
+  "properties": {
+    "id":        { "type": "string", "pattern": "^rg:law/.+\\.v\\d+$" },
+    "version":   { "type": "string" },
+    "type":      { "type": "string", "pattern": "^(rg|gw):LawCard$" },
+    "title":     { "type": "string" },
+    "kind":      { "type": "array", "minItems": 1, "items": { "type": "string" } },
+
+    "equations": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "object" }
+    },
+
+    "symbols":     { "type": "object", "additionalProperties": true },
+    "parameters":  { "type": "object", "additionalProperties": true },
+    "validity":    { "type": "object", "additionalProperties": true },
+
+    "invariants": {
+      "type": "object",
+      "required": ["conserves"],
+      "properties": {
+        "conserves": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["Energy", "LinearMomentum", "AngularMomentum"] },
+          "minItems": 0
+        },
+        "dissipative": { "type": "boolean" },
+        "driftBudget": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": { "rel": { "type": "number", "exclusiveMinimum": 0 } },
+            "required": ["rel"],
+            "additionalProperties": false
+          }
+        },
+        "notes": { "type": "string" }
+      },
+      "additionalProperties": false,
+
+      "allOf": [
+        {
+          "if": { "properties": { "dissipative": { "const": true } }, "required": ["dissipative"] },
+          "then": { "properties": { "conserves": { "maxItems": 0 } } }
+        },
+        {
+          "if": { "not": { "properties": { "dissipative": { "const": true } } } },
+          "then": { "properties": { "conserves": { "minItems": 1 } } }
+        }
+      ]
+    },
+
+    "stabilityModel": { "type": "object", "additionalProperties": true },
+    "testVectors":    { "type": "array", "items": { "type": "object" } },
+    "provenance":     { "type": "object", "additionalProperties": true },
+    "sha256":         { "type": "string" }
+  },
+
+  "additionalProperties": true
+}
