@@ -37,5 +37,6 @@ Use the bundle validator (no network):
 
 ```bash
 python spec/tools/spec_validate_all.py
+```
 
 - Francis Bousquet
