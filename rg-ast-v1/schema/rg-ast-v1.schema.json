@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://rulegraph.org/spec/rg-ast/v1/schema.json",
+  "$id": "https://rulegraph.org/schema/rg-ast/v1/rg-ast-v1.schema.json",
   "title": "RuleGraph AST v1",
   "type": "object",
   "oneOf": [
