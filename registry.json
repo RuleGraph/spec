@@ -1,8 +1,0 @@
-{
-  "schemas": [
-    { "id": "https://rulegraph.org/spec/rg-ast/v1/schema.json",
-      "path": "rg-ast-v1/schema/rg-ast-v1.schema.json" },
-    { "id": "https://rulegraph.org/spec/lawcard/v0.1/schema.json",
-      "path": "lawcard-v0.1/schema/lawcard.schema.json" }
-  ]
-}
