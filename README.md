@@ -7,7 +7,6 @@ to be resolved **offline** by tools; the `$id` URLs are identifiers, not network
 
 - `rg-ast-v1/` — canonical expression grammar (AST) for equations.
 - `lawcard-v0.1/` — LawCard schema (references AST v1).
-- `registry.json` — maps schema `$id` → local path (for offline validation).
 
 Each versioned directory (`*-vX[.Y]/`) contains:
 - `schema/*.json` — the JSON Schema (Draft 2020-12).
