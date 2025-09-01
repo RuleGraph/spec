@@ -1,0 +1,15 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rulegraph.org/spec/world/v0.1/world-v0.1schema.json",
+  "title": "World v0.1",
+  "type": "object",
+  "required": ["id","type","version","frames","entities","dynamics"],
+  "properties": {
+    "id": { "type": "string" }, "type": { "type": "string", "const": "rg:World" }, "version": { "type": "string" },
+    "frames": { "type": "array", "items": { "type": "object" }, "minItems": 1 },
+    "entities": { "type": "array", "items": { "type": "object" }, "minItems": 1 },
+    "dynamics": { "type": "array", "items": { "type": "object" }, "minItems": 1 },
+    "config": { "type": "object" }, "provenance": { "type": "object" }
+  },
+  "additionalProperties": true
+}
