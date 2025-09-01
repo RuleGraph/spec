@@ -123,6 +123,10 @@
       }
     },
 
+    "stability": { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/stability.schema.json" },
+    
+    "testVectors": { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/test-vectors.schema.json" },
+
     "provenance": { "type": "object" },
 
     "signatures": {
@@ -141,8 +145,12 @@
     "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
   },
 
-  "patternProperties": {
-    "^x-": {}
+   "additionalProperties": {
+    "anyOf": [
+      { "pattern": "^x-" },
+      { "const": "stability" },
+      { "const": "testVectors" }
+    ]
   },
 
   "$defs": {

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rulegraph.org/schema/lawcard/v0.2/extensions/test-vectors.schema.json",
+  "title": "RuleGraph LawCard Test Vectors Extension v0.2",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["name", "inputs"],
+    "properties": {
+      "name": { "type": "string" },
+      "inputs": { "type": "object", "additionalProperties": true },
+      "expected": { "type": "object", "additionalProperties": true },
+      "tolerance": {
+        "type": "object",
+        "properties": {
+          "abs": { "type": "number", "minimum": 0 },
+          "rel": { "type": "number", "minimum": 0 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "additionalProperties": true
+  }
+}
