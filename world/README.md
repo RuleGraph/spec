@@ -167,3 +167,14 @@ phase: integer ordering hint (lower phase runs earlier). Use to control sequenci
 - Deterministic composition: phase provides an ordering hint; combines tells engines how to fold multiple dynamics (additive/exclusive/nonlinear).
 - Explicit scope: selector makes law application unambiguous (pairs vs single-body vs all).
 - Unit safety: first frame must define {length,time,mass}; quantities carry units.
+
+# FAQ
+
+**Q: Do I need profile?**
+A: No. It’s for future domain presets (e.g., “planetary orbits” vs “crowd dynamics”) that external tools could enforce.
+
+**Q: Can I mix fields from other domains?**
+A: Yes—put domain-specific content in ext or vendor keys x-* without polluting the core.
+
+**Q: How do I model multi-law interaction?**
+A: Use multiple dynamics entries scoped by selector. Choose phase ordering and combines strategy to match your engine’s semantics.
