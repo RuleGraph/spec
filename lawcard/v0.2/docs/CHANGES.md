@@ -22,7 +22,7 @@ Each equations[*] must declare:
 Migration:
 If a v0.1 card has machine only, run the publisher to generate ast and add "astProfile":"rg-ast/v1".
 
-# 2) Symbols block (new, strongly recommended)
+# 2) Symbols block
 
 A structured declaration of model variables:
 ```
