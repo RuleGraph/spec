@@ -31,7 +31,7 @@ F_vec = -G*m1*m2/r**3 * r_vec
 
 - ast (optional in v0.1): a canonical JSON AST of the right-hand side (or let(lhs, rhs) form)
 
-In v0.1, ast may be omitted (engines can parse machine). If present, it should follow rg-ast/v1 conventions, but v0.1 doesn’t strictly require the astProfile string.
+In v0.1, ast may be omitted (engines can parse machine). If present, it should follow rg-ast/v1 conventions.
 
 # Parameters
 
