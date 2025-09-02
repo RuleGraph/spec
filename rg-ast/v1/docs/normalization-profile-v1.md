@@ -259,4 +259,4 @@ CI must fail if the tool’s output differs from the normalized fixtures.
 
 This document is Normalization Profile v1 for rg-ast v1.
 
-Grammar extensions (e.g., piecewise, min/max, field operators) will be a new rg-ast v2 with its own profile.
+Grammar extensions (e.g., piecewise, min/max, field operators) will be a new rg-ast with its own profile.
