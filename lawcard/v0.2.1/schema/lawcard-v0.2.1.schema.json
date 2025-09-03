@@ -1,0 +1,248 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rulegraph.org/schema/lawcard/v0.2.1/lawcard-v0.2.1.schema.json",
+  "title": "RuleGraph LawCard v0.2.1 (draft)",
+  "type": "object",
+
+  "required": [
+    "id",
+    "version",
+    "type",
+    "title",
+    "license",
+    "kind",
+    "equations",
+    "parameters",
+    "validity",
+    "invariants",
+    "provenance"
+  ],
+
+  "properties": {
+    "@context": { "type": ["object", "string"] },
+
+    "id":      { "type": "string", "pattern": "^rg:law/.+\\.v\\d+$" },
+    "version": { "type": "string", "minLength": 1 },
+    "type":    { "type": "string", "enum": ["rg:LawCard"] },
+    "title":   { "type": "string", "minLength": 1 },
+    "license":   { "type": "string" },
+
+    "kind": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+
+    "equations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["ast", "astProfile"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^rg:eq/.+\\.v\\d+$",
+            "description": "Optional stable IRI for this equation."
+          },
+          "name":    { "type": "string" },
+          "machine": { "type": "string" },
+          "tex":     { "type": "string" },
+
+          "astProfile": { "type": "string", "const": "rg-ast/v1.2" },
+          "ast": {
+            "$ref": "https://rulegraph.org/schema/rg-ast/v1.2/rg-ast-v1.2.schema.json#/$defs/Node"
+          },
+
+          "astSha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "description": "Optional atom-level hash: sha256 of the canonical AST node only."
+          }
+        }
+      }
+    },
+
+    "symbols": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/SymbolMeta" }
+    },
+
+    "parameters": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/Parameter" }
+    },
+
+    "validity": {
+      "type": "object",
+      "required": ["assumptions"],
+      "additionalProperties": false,
+      "properties": {
+        "regimes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "desc": { "type": "string" },
+              "min":  { "type": "number" },
+              "max":  { "type": "number" }
+            }
+          }
+        },
+        "assumptions": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "invariants": {
+      "type": "object",
+      "required": ["conserves"],
+      "additionalProperties": false,
+      "properties": {
+        "conserves": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["Energy", "LinearMomentum", "AngularMomentum"]
+          },
+          "minItems": 0
+        },
+        "dissipative": { "type": "boolean" },
+        "driftBudget": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["rel"],
+            "additionalProperties": false,
+            "properties": {
+              "rel": { "type": "number", "exclusiveMinimum": 0 }
+            }
+          }
+        },
+        "notes": { "type": "string" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "dissipative": { "const": true } }, "required": ["dissipative"] },
+          "then": { "properties": { "conserves": { "maxItems": 0 } } }
+        },
+        {
+          "if": { "not": { "properties": { "dissipative": { "const": true } } } },
+          "then": { "properties": { "conserves": { "minItems": 1 } } }
+        }
+      ]
+    },
+
+    "numericProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "dtype": { "type": "string", "enum": ["float32", "float64"] },
+        "fma":   { "type": "boolean" },
+        "order": { "type": "string", "enum": ["deterministic", "fast"] },
+        "rngSeed": { "type": ["integer", "null"] }
+      }
+    },
+
+    "usageHints": { "type": "object" },
+
+    "publisher": { "type": "string" },
+
+    "schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ast":     { "type": "string", "format": "uri" },
+        "lawcard": { "type": "string", "format": "uri" }
+      }
+    },
+
+    "stability": {
+      "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/stability.schema.json"
+    },
+
+    "testVectors": {
+      "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/test-vectors.schema.json"
+    },
+
+    "provenance": { "type": "object" },
+
+    "signatures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alg":      { "type": "string" },
+          "identity": { "type": "string" },
+          "sig":      { "type": "string" }
+        }
+      }
+    },
+
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+
+  "patternProperties": {
+    "^x-": {}
+  },
+
+  "additionalProperties": false,
+
+  "$defs": {
+    "Dim": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "L": { "type": "integer" },
+        "M": { "type": "integer" },
+        "T": { "type": "integer" },
+        "I": { "type": "integer" },
+        "Θ": { "type": "integer" },
+        "N": { "type": "integer" },
+        "J": { "type": "integer" }
+      }
+    },
+
+    "SymbolMeta": {
+      "type": "object",
+      "required": ["kind", "unit", "dimension", "role"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["scalar", "vector3", "vector", "matrix"]
+        },
+        "unit": { "type": "string", "minLength": 1 },
+        "dimension": { "$ref": "#/$defs/Dim" },
+        "role": {
+          "type": "string",
+          "enum": ["parameter", "state", "state-or-input", "intermediate", "output", "derived"]
+        },
+        "shape": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "integer", "minimum": 1 }
+        },
+        "derivedFrom": { "type": "array", "items": { "type": "string" } },
+        "domain": { "type": "string" },
+        "description": { "type": "string" },
+        "note": { "type": "string" }
+      }
+    },
+
+    "Parameter": {
+      "type": "object",
+      "required": ["value", "unit"],
+      "additionalProperties": false,
+      "properties": {
+        "value": { "type": "number" },
+        "unit":  { "type": "string", "minLength": 1 },
+        "sigma": { "type": "number" },
+        "dimension": { "$ref": "#/$defs/Dim" },
+        "description": { "type": "string" }
+      }
+    }
+  }
+}
