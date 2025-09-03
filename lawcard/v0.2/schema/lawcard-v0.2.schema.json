@@ -32,8 +32,8 @@
           "name":       { "type": "string" },
           "machine":    { "type": "string" }, 
           "tex":        { "type": "string" },
-          "astProfile": { "type": "string", "const": "rg-ast/v1" },
-          "ast": { "$ref": "https://rulegraph.org/schema/rg-ast/v1/rg-ast-v1.schema.json#/$defs/Node" }
+          "astProfile": { "type": "string", "const": "rg-ast/v1.2" },
+          "ast": { "$ref": "https://rulegraph.org/schema/rg-ast/v1.2/rg-ast-v1.2.schema.json#/$defs/Node" }
         }
       }
     },
