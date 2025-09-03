@@ -52,27 +52,39 @@
       "minItems": 2,
       "items": { "$ref": "#/$defs/Node" }
     },
+    
     "sub": {
       "type": "array",
       "minItems": 2,
       "items": { "$ref": "#/$defs/Node" }
     },
+
     "mul": {
       "type": "array",
       "minItems": 2,
       "items": { "$ref": "#/$defs/Node" }
     },
+
     "div": {
       "type": "array",
       "minItems": 2,
       "maxItems": 2,
-      "items": { "$ref": "#/$defs/Node" }
+      "prefixItems": [
+        { "$ref": "#/$defs/Node" },
+        { "$ref": "#/$defs/Node" }
+      ],
+      "items": false
     },
+
     "pow": {
       "type": "array",
       "minItems": 2,
       "maxItems": 2,
-      "items": { "$ref": "#/$defs/Node" }
+      "prefixItems": [
+        { "$ref": "#/$defs/Node" },
+        { "$ref": "#/$defs/Node" }
+      ],
+      "items": false
     },
 
     "vec": {
@@ -108,10 +120,11 @@
       "type": "array",
       "minItems": 2,
       "maxItems": 2,
-      "items": [
+      "prefixItems": [
         { "type": "object", "required": ["sym"], "properties": { "sym": { "type": "string" } }, "additionalProperties": false },
         { "$ref": "#/$defs/Node" }
-      ]
+      ],
+      "items": false
     },
 
     "piecewise": {
