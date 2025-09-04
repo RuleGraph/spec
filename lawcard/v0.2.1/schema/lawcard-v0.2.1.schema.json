@@ -25,7 +25,7 @@
     "version": { "type": "string", "minLength": 1 },
     "type":    { "type": "string", "enum": ["rg:LawCard"] },
     "title":   { "type": "string", "minLength": 1 },
-    "license":   { "type": "string" },
+    "license": { "type": "string" },
 
     "kind": {
       "type": "array",
@@ -43,8 +43,8 @@
         "properties": {
           "id": {
             "type": "string",
-            "pattern": "^rg:eq/.+\\.v\\d+$",
-            "description": "Optional stable IRI for this equation."
+            "pattern": "^(rg:law/.+\\.v\\d+#eq/\\d+|rg:eq/.+\\.v\\d+(#eq/\\d+)?)$",
+            "description": "Equation identifier. Allow fragment form or eq-namespace."
           },
           "name":    { "type": "string" },
           "machine": { "type": "string" },
