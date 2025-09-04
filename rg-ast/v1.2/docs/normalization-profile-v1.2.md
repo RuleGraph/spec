@@ -66,6 +66,8 @@ LawCards should tag equations with:
     - identity: pow(x,1) → x.
 - No domain-dependent rewrites (e.g., don’t force pow(x,0)→1).
 
+If the merged exponent is an exact integer (e.g., -3.0 or -3/1), serialize it as {"const": -3} (an int), not a float or rational.
+
 **neg**
 
 - neg(neg(x)) → x.
@@ -138,7 +140,7 @@ OUT: {"pow":[{"sym":"r"},{"const":-3}]}
 **Sign handling in product**
 ```
 IN : {"mul":[{"neg":{"sym":"x"}},{"const":-2},{"sym":"a"}]}
-OUT: {"mul":[{"const":2},{"sym":"a"},{"sym":"x"}]}
+OUT: {"mul":[{"sym":"a"},{"sym":"x"},{"const":2}]}
 ```
 
 **Piecewise (branches normalized, order preserved)**
