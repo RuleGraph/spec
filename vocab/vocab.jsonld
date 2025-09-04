@@ -1,31 +1,214 @@
 {
   "@context": {
+    "@version": 1.1,
+
     "id": "@id",
     "type": "@type",
 
-    "rg": "https://rulegraph.org/vocab#",
-    "unit": "https://qudt.org/vocab/unit/",
-    "prov": "http://www.w3.org/ns/prov#",
+    "rg":    "https://rulegraph.org/vocab#",
+    "unit":  "https://qudt.org/vocab/unit/",
+    "prov":  "http://www.w3.org/ns/prov#",
+    "rdf":   "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs":  "http://www.w3.org/2000/01/rdf-schema#",
+    "schema":"https://schema.org/",
+    "xsd":   "http://www.w3.org/2001/XMLSchema#",
 
-    "skos": "http://www.w3.org/2004/02/skos/core#",
-    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "label":   "rdfs:label",
+    "comment": "rdfs:comment",
+    "seeAlso": { "@id": "rdfs:seeAlso", "@type": "@id" },
 
-    "LawCard": "rg:LawCard",
-    "Equation": "rg:Equation",
-    "Symbol": "rg:Symbol",
+    "subClassOf":   { "@id": "rdfs:subClassOf",   "@type": "@id" },
+    "domainIncludes": { "@id": "schema:domainIncludes", "@type": "@id" },
+    "rangeIncludes":  { "@id": "schema:rangeIncludes",  "@type": "@id" }
+  },
 
-    "kind": "rg:kind",
-    "role": "rg:role",
-    "domain": "rg:domain",
-    "capability": "rg:capability",
-    "conserves": "rg:conserves",
+  "@graph": [
+    {
+      "id": "rg:LawCard",
+      "type": "rdfs:Class",
+      "label": "LawCard",
+      "comment": "A portable rule definition (metadata + symbols + equations + validity + invariants + provenance)."
+    },
+    {
+      "id": "rg:SingleBodyLaw",
+      "type": "rdfs:Class",
+      "subClassOf": "rg:LawCard",
+      "label": "Single-body law",
+      "comment": "Law that acts on one body (e.g., drag, Lorentz, self-force)."
+    },
+    {
+      "id": "rg:PairwiseLaw",
+      "type": "rdfs:Class",
+      "subClassOf": "rg:LawCard",
+      "label": "Pairwise law",
+      "comment": "Law that acts on an ordered pair of bodies (e.g., Newtonian gravity, Coulomb)."
+    },
+    {
+      "id": "rg:Equation",
+      "type": "rdfs:Class",
+      "label": "Equation",
+      "comment": "An equation entry of a LawCard (machine string, TeX, canonical AST, profile, etc.)."
+    },
+    {
+      "id": "rg:Symbol",
+      "type": "rdfs:Class",
+      "label": "Symbol",
+      "comment": "A typed quantity with unit/dimension and a role (parameter, state, output, etc.)."
+    },
+    {
+      "id": "rg:Parameter",
+      "type": "rdfs:Class",
+      "label": "Parameter",
+      "comment": "A named, unitful parameter (value [+ sigma]) used by a law."
+    },
 
-    "status": "rg:status",
-    "introducedIn": "rg:introducedIn",
-    "deprecatedIn": "rg:deprecatedIn",
-    "supersededBy": {
-      "@id": "rg:supersededBy",
-      "@type": "@id"
+
+    {
+      "id": "rg:hasEquation",
+      "type": "rdf:Property",
+      "label": "has equation",
+      "comment": "Associates a LawCard with one of its equations.",
+      "domainIncludes": "rg:LawCard",
+      "rangeIncludes":  "rg:Equation"
+    },
+    {
+      "id": "rg:hasSymbol",
+      "type": "rdf:Property",
+      "label": "has symbol",
+      "comment": "Associates a LawCard with a symbol it defines.",
+      "domainIncludes": "rg:LawCard",
+      "rangeIncludes":  "rg:Symbol"
+    },
+    {
+      "id": "rg:hasParameter",
+      "type": "rdf:Property",
+      "label": "has parameter",
+      "comment": "Associates a LawCard with a parameter metadata entry.",
+      "domainIncludes": "rg:LawCard",
+      "rangeIncludes":  "rg:Parameter"
+    },
+
+
+    {
+      "id": "rg:ast",
+      "type": "rdf:Property",
+      "label": "AST",
+      "comment": "Canonical RuleGraph AST JSON for the equation.",
+      "domainIncludes": "rg:Equation"
+    },
+    {
+      "id": "rg:astProfile",
+      "type": "rdf:Property",
+      "label": "AST profile",
+      "comment": "Normalization profile tag, e.g. 'rg-ast/v1.2'.",
+      "domainIncludes": "rg:Equation",
+      "rangeIncludes":  "xsd:string"
+    },
+    {
+      "id": "rg:astSha256",
+      "type": "rdf:Property",
+      "label": "AST sha256",
+      "comment": "Hex sha256 of the canonical AST JSON.",
+      "domainIncludes": "rg:Equation",
+      "rangeIncludes":  "xsd:string"
+    },
+    {
+      "id": "rg:machine",
+      "type": "rdf:Property",
+      "label": "machine",
+      "comment": "Source equation string in the authoring language (e.g., SymPy-like).",
+      "domainIncludes": "rg:Equation",
+      "rangeIncludes":  "xsd:string"
+    },
+    {
+      "id": "rg:tex",
+      "type": "rdf:Property",
+      "label": "TeX",
+      "comment": "LaTeX rendering of the equation.",
+      "domainIncludes": "rg:Equation",
+      "rangeIncludes":  "xsd:string"
+    },
+    {
+      "id": "rg:equationId",
+      "type": "rdf:Property",
+      "label": "equation id",
+      "comment": "Stable IRI for the equation within its card (e.g., rg:law/...#eq/1).",
+      "domainIncludes": "rg:Equation",
+      "rangeIncludes":  "xsd:anyURI"
+    },
+
+
+    {
+      "id": "rg:role",
+      "type": "rdf:Property",
+      "label": "role",
+      "comment": "Semantic role of a symbol: parameter | state | state-or-input | intermediate | output | derived.",
+      "domainIncludes": "rg:Symbol",
+      "rangeIncludes":  "xsd:string"
+    },
+    {
+      "id": "rg:unit",
+      "type": "rdf:Property",
+      "label": "unit",
+      "comment": "Unit IRI (typically QUDT unit:… IRI).",
+      "domainIncludes": [ "rg:Symbol", "rg:Parameter" ],
+      "rangeIncludes":  "xsd:anyURI"
+    },
+    {
+      "id": "rg:dimension",
+      "type": "rdf:Property",
+      "label": "dimension",
+      "comment": "Physical dimensions (e.g., base exponents for L, M, T, …).",
+      "domainIncludes": [ "rg:Symbol", "rg:Parameter" ]
+    },
+    {
+      "id": "rg:derivedFrom",
+      "type": "rdf:Property",
+      "label": "derived from",
+      "comment": "Other symbols this one is derived from.",
+      "domainIncludes": "rg:Symbol"
+    },
+
+
+    {
+      "id": "rg:validity",
+      "type": "rdf:Property",
+      "label": "validity",
+      "comment": "Assumptions and regimes under which a law is intended to hold.",
+      "domainIncludes": "rg:LawCard"
+    },
+    {
+      "id": "rg:conserves",
+      "type": "rdf:Property",
+      "label": "conserves",
+      "comment": "Conserved quantities (e.g., Energy, LinearMomentum, AngularMomentum).",
+      "domainIncludes": "rg:LawCard",
+      "rangeIncludes":  "xsd:string"
+    },
+    {
+      "id": "rg:dissipative",
+      "type": "rdf:Property",
+      "label": "dissipative",
+      "comment": "Whether the law is dissipative.",
+      "domainIncludes": "rg:LawCard",
+      "rangeIncludes":  "xsd:boolean"
+    },
+    {
+      "id": "rg:driftBudget",
+      "type": "rdf:Property",
+      "label": "drift budget",
+      "comment": "Tolerance targets for numeric drift of invariants.",
+      "domainIncludes": "rg:LawCard"
+    },
+
+
+    {
+      "id": "rg:provenance",
+      "type": "rdf:Property",
+      "label": "provenance",
+      "comment": "PROV-O compatible provenance block.",
+      "domainIncludes": "rg:LawCard",
+      "rangeIncludes":  "prov:Entity"
     }
-  }
+  ]
 }
