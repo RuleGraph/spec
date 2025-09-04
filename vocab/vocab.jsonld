@@ -1,0 +1,31 @@
+{
+  "@context": {
+    "id": "@id",
+    "type": "@type",
+
+    "rg": "https://rulegraph.org/vocab#",
+    "unit": "https://qudt.org/vocab/unit/",
+    "prov": "http://www.w3.org/ns/prov#",
+
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+
+    "LawCard": "rg:LawCard",
+    "Equation": "rg:Equation",
+    "Symbol": "rg:Symbol",
+
+    "kind": "rg:kind",
+    "role": "rg:role",
+    "domain": "rg:domain",
+    "capability": "rg:capability",
+    "conserves": "rg:conserves",
+
+    "status": "rg:status",
+    "introducedIn": "rg:introducedIn",
+    "deprecatedIn": "rg:deprecatedIn",
+    "supersededBy": {
+      "@id": "rg:supersededBy",
+      "@type": "@id"
+    }
+  }
+}
