@@ -1,0 +1,325 @@
+{
+  "@context": [
+    "https://rulegraph.org/vocab/vocab.jsonld",
+    { "skos": "http://www.w3.org/2004/02/skos/core#" }
+  ],
+  "@id": "https://rulegraph.org/vocab",
+  "@type": "skos:ConceptScheme",
+  "skos:prefLabel": "RuleGraph Core Vocabulary",
+  "skos:definition": "Controlled terms for kinds, roles, invariants, capabilities, and domains used by RuleGraph LawCards.",
+  "status": "stable",
+  "introducedIn": "2025-09-03",
+  "skos:hasTopConcept": [
+    "rg:SingleBodyLaw",
+    "rg:PairwiseLaw",
+    "rg:FieldLaw",
+    "rg:ConstraintLaw",
+    "rg:EventLaw",
+    "rg:ConstitutiveLaw",
+
+    "rg:parameter",
+    "rg:state",
+    "rg:state-or-input",
+    "rg:intermediate",
+    "rg:output",
+    "rg:derived",
+
+    "rg:Energy",
+    "rg:LinearMomentum",
+    "rg:AngularMomentum",
+    "rg:Mass",
+    "rg:Charge",
+
+    "rg:conservative",
+    "rg:dissipative",
+    "rg:usesPiecewise",
+    "rg:stochastic",
+    "rg:nonlocal",
+    "rg:fieldDependent",
+    "rg:constraint",
+    "rg:discontinuous",
+    "rg:stiff",
+    "rg:implicitHint",
+
+    "rg:domain/physics",
+    "rg:domain/finance",
+    "rg:domain/policy",
+    "rg:domain/geospatial",
+    "rg:domain/biology",
+    "rg:domain/graphics"
+  ],
+  "@graph": [
+    {
+      "@id": "rg:SingleBodyLaw",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Single-Body Law",
+      "skos:definition": "A rule that computes effects using a single entity's state (e.g., linear drag on a body).",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:PairwiseLaw",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Pairwise Law",
+      "skos:definition": "A rule that computes interactions between two entities (e.g., inverse-square gravity, Hooke spring).",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:FieldLaw",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Field Law",
+      "skos:definition": "A rule that maps state to a field contribution (e.g., charge density to electric field).",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:ConstraintLaw",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Constraint Law",
+      "skos:definition": "A rule that enforces kinematic or algebraic constraints (e.g., holonomic constraints, balance constraints).",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:EventLaw",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Event Law",
+      "skos:definition": "A rule representing discrete or impulsive events (e.g., impact, policy trigger, tax withholding event).",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:ConstitutiveLaw",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Constitutive Law",
+      "skos:definition": "A local response rule relating variables (e.g., stress–strain, price–demand response).",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+
+    
+    {
+      "@id": "rg:parameter",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Parameter",
+      "skos:definition": "A fixed or slowly varying input to the law (e.g., G, k, alpha).",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:state",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "State",
+      "skos:definition": "A dynamical quantity integrated over time or otherwise persisted (e.g., position, velocity, capital stock).",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:state-or-input",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "State or Input",
+      "skos:definition": "A quantity that may be provided externally or derived from state (e.g., r derived from r_vec).",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:intermediate",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Intermediate",
+      "skos:definition": "An internal helper variable used by equations (e.g., norms, distances).",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:output",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Output",
+      "skos:definition": "A quantity produced by the law for downstream use (e.g., F_vec).",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:derived",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Derived",
+      "skos:definition": "A quantity computed from other symbols but not directly evolved or output.",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+
+    
+    {
+      "@id": "rg:Energy",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Energy",
+      "skos:definition": "Total energy of the system; used for conservation or drift auditing.",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:LinearMomentum",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Linear Momentum",
+      "skos:definition": "Total linear momentum; used for conservation or drift auditing.",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:AngularMomentum",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Angular Momentum",
+      "skos:definition": "Total angular momentum; used for conservation or drift auditing.",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:Mass",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Mass",
+      "skos:definition": "Total mass (or conserved scalar) as an invariant.",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:Charge",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Charge",
+      "skos:definition": "Total charge as an invariant (e.g., in electrodynamics or accounting with signed balances).",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+
+    
+    {
+      "@id": "rg:conservative",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Conservative",
+      "skos:definition": "Dynamics that conserve system energy in the absence of dissipative terms (numerical drift may still occur).",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:dissipative",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Dissipative",
+      "skos:definition": "Dynamics with negative definite power (e.g., drag); energy decreases over time.",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:usesPiecewise",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Uses Piecewise",
+      "skos:definition": "Equation contains piecewise branching.",
+      "status": "stable",
+      "introducedIn": "v1.2"
+    },
+    {
+      "@id": "rg:stochastic",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Stochastic",
+      "skos:definition": "Rule includes randomness (e.g., RNG dependence, noise inputs).",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:nonlocal",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Nonlocal",
+      "skos:definition": "Rule depends on nonlocal information (e.g., integrals over a domain, network neighborhoods).",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:fieldDependent",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Field-Dependent",
+      "skos:definition": "Rule depends on an externally provided or computed field (e.g., wind field, policy rate curve).",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:constraint",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Constraint",
+      "skos:definition": "Rule enforces kinematic or algebraic constraints.",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:discontinuous",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Discontinuous",
+      "skos:definition": "Rule may produce discontinuities (e.g., impulses, events, threshold logic).",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:stiff",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Stiff",
+      "skos:definition": "Rule is likely stiff numerically; implicit or adaptive integration recommended.",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:implicitHint",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Implicit Hint",
+      "skos:definition": "Author recommends implicit treatment for stability.",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+
+    
+    {
+      "@id": "rg:domain/physics",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Physics",
+      "skos:definition": "Physical systems and models.",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:domain/finance",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Finance",
+      "skos:definition": "Financial models, risk, pricing, and accounting rules.",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:domain/policy",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Policy",
+      "skos:definition": "Policies, regulations, and institutional rules.",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:domain/geospatial",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Geospatial",
+      "skos:definition": "Spatial rules, flows, and interactions across regions or networks.",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:domain/biology",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Biology",
+      "skos:definition": "Biophysical and ecological rules (e.g., growth, interaction, transport).",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    },
+    {
+      "@id": "rg:domain/graphics",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Graphics",
+      "skos:definition": "Rendering and animation rules (e.g., shading, appearance, materials).",
+      "status": "stable",
+      "introducedIn": "v0.2"
+    }
+  ]
+}
