@@ -14,7 +14,12 @@
       "year": { "type": "integer" },
       "url":  { "type": "string", "format": "uri" },
       "doi":  { "type": "string", "pattern": "^10\\..+" },
-      "equationRef": { "type": "string" },
+      "equationRef": {
+        "oneOf": [
+          { "type": "string" },
+          { "type": "array", "items": { "type": "string" } }
+        ]
+      },
       "variableMap": {
         "type": "object",
         "additionalProperties": { "type": "string" }

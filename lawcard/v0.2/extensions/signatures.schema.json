@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://rulegraph.org/schema/lawcard/v0.2.1/extensions/signatures.schema.json",
+  "$id": "https://rulegraph.org/schema/lawcard/v0.2/extensions/signatures.schema.json",
   "title": "LawCard Extension — signatures",
   "type": "array",
   "items": {
@@ -31,8 +31,11 @@
         "type": "string",
         "pattern": "^[A-Za-z0-9_-]+$",
         "description": "Base64url-encoded signature bytes."
-      }
+      },
+      "issuer":  { "type": "string" },
+      "purpose": { "type": "string" } 
     },
+
     "required": ["alg", "keyId", "sig"]
   }
 }

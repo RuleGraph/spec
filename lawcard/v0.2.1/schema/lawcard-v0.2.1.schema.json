@@ -9,6 +9,7 @@
     "version",
     "type",
     "title",
+    "publisher",
     "license",
     "kind",
     "equations",
@@ -25,6 +26,7 @@
     "version": { "type": "string", "minLength": 1 },
     "type":    { "type": "string", "enum": ["rg:LawCard"] },
     "title":   { "type": "string", "minLength": 1 },
+    "publisher": { "type": "string" },
     "license": { "type": "string" },
 
     "kind": {
@@ -134,21 +136,6 @@
       ]
     },
 
-    "numericProfile": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "dtype": { "type": "string", "enum": ["float32", "float64"] },
-        "fma":   { "type": "boolean" },
-        "order": { "type": "string", "enum": ["deterministic", "fast"] },
-        "rngSeed": { "type": ["integer", "null"] }
-      }
-    },
-
-    "usageHints": { "type": "object" },
-
-    "publisher": { "type": "string" },
-
     "schema": {
       "type": "object",
       "additionalProperties": false,
@@ -160,7 +147,6 @@
 
     "stability": {"$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/stability.schema.json"},
     "testVectors": {"$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/test-vectors.schema.json"},
-    "references": { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/references.schema.json" },
     "frames":     { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/frames.schema.json"     },
     "domains":    { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/domains.schema.json"    },
     "geometry":   { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/geometry.schema.json"   },
@@ -175,22 +161,9 @@
     "nonDimensionalization": { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/non-dimensionalization.schema.json" },
     "contactModel": { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/contact-model.schema.json" },
     "couplingFields": { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/coupling-fields.schema.json" },
-
-
-    "provenance": { "type": "object" },
-
-    "signatures": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "alg":      { "type": "string" },
-          "identity": { "type": "string" },
-          "sig":      { "type": "string" }
-        }
-      }
-    },
+    "references": { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/references.schema.json" },
+    "signatures": { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/signatures.schema.json" },
+    "provenance":        { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/prov.schema.json" },
 
     "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
   },

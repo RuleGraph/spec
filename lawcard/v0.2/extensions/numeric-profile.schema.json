@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://rulegraph.org/schema/lawcard/v0.2.1/extensions/numeric-profile.schema.json",
+  "$id": "https://rulegraph.org/schema/lawcard/v0.2/extensions/numeric-profile.schema.json",
   "title": "LawCard Extension — numericProfile",
   "type": "object",
   "additionalProperties": false,
