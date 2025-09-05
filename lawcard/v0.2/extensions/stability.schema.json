@@ -1,12 +1,27 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://rulegraph.org/schema/lawcard/v0.2/extensions/stability.schema.json",
-  "title": "RuleGraph LawCard Stability Extension v0.2",
+  "title": "LawCard Extension - Stability",
   "type": "object",
+  "additionalProperties": false,
   "properties": {
-    "cflHint": { "type": "number", "minimum": 0 },
-    "dtMaxRuleMachine": { "type": "string", "minLength": 1 },
-    "dtMaxRuleTex": { "type": "string", "minLength": 1 }
-  },
-  "additionalProperties": true
+    "cflHint": {
+      "description": "Dimensionless safety hint (e.g., 0.25…0.5) used to scale dt bounds.",
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "dtMaxRuleMachine": {
+      "description": "Human-writable machine expression describing a safe explicit timestep rule.",
+      "type": "string",
+      "minLength": 1
+    },
+    "dtMaxRuleTex": {
+      "description": "LaTeX of the dt rule (display-only, optional).",
+      "type": "string"
+    },
+    "notes": {
+      "description": "Plain-language guidance (assumptions, caveats, integrator notes).",
+      "type": "string"
+    }
+  }
 }

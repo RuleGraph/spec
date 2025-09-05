@@ -158,13 +158,24 @@
       }
     },
 
-    "stability": {
-      "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/stability.schema.json"
-    },
+    "stability": {"$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/stability.schema.json"},
+    "testVectors": {"$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/test-vectors.schema.json"},
+    "references": { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/references.schema.json" },
+    "frames":     { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/frames.schema.json"     },
+    "domains":    { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/domains.schema.json"    },
+    "geometry":   { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/geometry.schema.json"   },
+    "stochastic": { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/stochastic.schema.json" },
+    "calibration":{ "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/calibration.schema.json"},
+    "composition":{ "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/composition.schema.json"},
+    "constraints":{ "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/constraints.schema.json"},
+    "boundaryConditions": { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/boundary-conditions.schema.json" },
+    "vizHints":   { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/viz-hints.schema.json"  },
+    "numericHints":{ "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/numeric-hints.schema.json" },
+    "digitalSignatures": { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/digital-signatures.schema.json" },
+    "nonDimensionalization": { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/non-dimensionalization.schema.json" },
+    "contactModel": { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/contact-model.schema.json" },
+    "couplingFields": { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/coupling-fields.schema.json" },
 
-    "testVectors": {
-      "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/test-vectors.schema.json"
-    },
 
     "provenance": { "type": "object" },
 

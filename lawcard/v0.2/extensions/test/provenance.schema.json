@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://rulegraph.org/schema/lawcard/v0.2.1/extensions/prov.schema.json",
-  "title": "LawCard Extension — prov (provenance)",
+  "$id": "https://rulegraph.org/schema/lawcard/v0.2.1/extensions/provenance.schema.json",
+  "title": "LawCard Extension — provenance",
   "type": "object",
   "additionalProperties": false,
   "properties": {
