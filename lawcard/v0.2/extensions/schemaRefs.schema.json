@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rulegraph.org/schema/lawcard/v0.2/extensions/schema-refs.schema.json",
+  "title": "LawCard Extension — schema-refs",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "ast": {
+      "type": "object",
+      "required": ["uri"],
+      "additionalProperties": false,
+      "properties": {
+        "uri":   {"type": "string", "format": "uri"},
+        "sha256":{"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "lawcard": {
+      "type": "object",
+      "required": ["uri"],
+      "additionalProperties": false,
+      "properties": {
+        "uri":   {"type": "string", "format": "uri"},
+        "sha256":{"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  }
+}
