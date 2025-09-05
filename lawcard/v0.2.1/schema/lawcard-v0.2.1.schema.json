@@ -20,7 +20,7 @@
   ],
 
   "properties": {
-    "@context": { "type": ["object", "string"] },
+    "@context": { "type": ["object", "string", "array"] },
 
     "id":      { "type": "string", "pattern": "^rg:law/.+\\.v\\d+$" },
     "version": { "type": "string", "minLength": 1 },
@@ -136,34 +136,14 @@
       ]
     },
 
-    "schema": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "ast":     { "type": "string", "format": "uri" },
-        "lawcard": { "type": "string", "format": "uri" }
-      }
-    },
-
     "stability": {"$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/stability.schema.json"},
     "testVectors": {"$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/test-vectors.schema.json"},
-    "frames":     { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/frames.schema.json"     },
     "domains":    { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/domains.schema.json"    },
-    "geometry":   { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/geometry.schema.json"   },
-    "stochastic": { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/stochastic.schema.json" },
-    "calibration":{ "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/calibration.schema.json"},
-    "composition":{ "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/composition.schema.json"},
-    "constraints":{ "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/constraints.schema.json"},
-    "boundaryConditions": { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/boundary-conditions.schema.json" },
-    "vizHints":   { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/viz-hints.schema.json"  },
-    "numericHints":{ "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/numeric-hints.schema.json" },
-    "digitalSignatures": { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/digital-signatures.schema.json" },
-    "nonDimensionalization": { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/non-dimensionalization.schema.json" },
-    "contactModel": { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/contact-model.schema.json" },
-    "couplingFields": { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/coupling-fields.schema.json" },
     "references": { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/references.schema.json" },
     "signatures": { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/signatures.schema.json" },
     "provenance":        { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/prov.schema.json" },
+    "numericProfile": {"$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/numeric-profile.schema.json"},
+    "schemaRefs": {"$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/schema-refs.schema.json"},
 
     "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
   },
