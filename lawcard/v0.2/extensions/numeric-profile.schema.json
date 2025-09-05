@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rulegraph.org/schema/lawcard/v0.2.1/extensions/numeric-profile.schema.json",
+  "title": "LawCard Extension — numericProfile",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "dtype": { "type": "string", "enum": ["float32", "float64"], "default": "float64" },
+    "order": { "type": "string", "enum": ["deterministic", "fast"], "default": "deterministic" },
+    "fma": { "type": "boolean", "default": true },
+    "rngSeed": { "type": ["integer", "null"], "default": null },
+    "roundingMode": { "type": "string", "enum": ["tiesToEven", "tiesToAway"], "default": "tiesToEven" }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rulegraph.org/schema/lawcard/v0.2/extensions/stochastic.schema.json",
+  "title": "LawCard Extension — stochastic",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "rng": { "type": "string" },
+    "seed": { "type": ["integer","null"] },
+    "terms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "target": { "type": "string" },
+          "distribution": { "type": "string", "enum": ["normal","uniform","laplace","studentT"] },
+          "mean": { "type": "number" },
+          "sigma": { "type": "number" },
+          "low":  { "type": "number" },
+          "high": { "type": "number" },
+          "unit": { "type": "string" },
+          "notes": { "type": "string" }
+        },
+        "required": ["target","distribution"]
+      }
+    }
+  }
+}

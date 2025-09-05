@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rulegraph.org/schema/lawcard/v0.2/extensions/boundary-conditions.schema.json",
+  "title": "LawCard Extension — boundaryConditions",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "region": { "type": "string" },
+      "type": { "type": "string", "enum": ["wall","periodic","inflow","outflow","custom"] },
+      "restitution": { "type": "number", "minimum": 0, "maximum": 1 },
+      "friction": { "type": "number", "minimum": 0 },
+      "notes": { "type": "string" }
+    },
+    "required": ["region","type"]
+  }
+}

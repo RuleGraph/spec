@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rulegraph.org/schema/lawcard/v0.2/extensions/references.schema.json",
+  "title": "LawCard Extension — references",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "kind": { "type": "string", "enum": ["doi","url","textbook","article","dataset","other"] },
+      "id":   { "type": "string" },
+      "title":{ "type": "string" },
+      "authors": { "type": "array", "items": { "type": "string" } },
+      "year": { "type": "integer" },
+      "url":  { "type": "string", "format": "uri" },
+      "doi":  { "type": "string", "pattern": "^10\\..+" },
+      "equationRef": { "type": "string" },
+      "variableMap": {
+        "type": "object",
+        "additionalProperties": { "type": "string" }
+      },
+      "notes": { "type": "string" }
+    },
+    "anyOf": [
+      { "required": ["doi"] },
+      { "required": ["url"] },
+      { "required": ["id"] }
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rulegraph.org/schema/lawcard/v0.2.1/extensions/prov.schema.json",
+  "title": "LawCard Extension — prov (provenance)",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "wasAttributedTo": { "type": "string", "minLength": 1 },
+    "generatedAtTime": { "type": "string", "format": "date-time" },
+    "wasDerivedFrom": {
+      "type": "array",
+      "items": { "type": "string", "format": "uri" }
+    },
+    "sourceRepository": { "type": "string", "format": "uri" },
+    "sourceDOI": { "type": "string", "minLength": 3 },
+    "commit": { "type": "string", "minLength": 3 },
+    "tool": { "type": "string" },
+    "toolVersion": { "type": "string" },
+    "notes": { "type": "string" }
+  },
+  "required": ["wasAttributedTo", "generatedAtTime"]
+}

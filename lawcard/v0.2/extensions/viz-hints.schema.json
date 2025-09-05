@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rulegraph.org/schema/lawcard/v0.2/extensions/viz-hints.schema.json",
+  "title": "LawCard Extension — vizHints",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "plots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "x": { "type": "string" },
+          "y": { "type": "string" },
+          "title": { "type": "string" },
+          "kind": { "type": "string", "enum": ["line","scatter","bar"] }
+        },
+        "required": ["y"]
+      }
+    }
+  }
+}

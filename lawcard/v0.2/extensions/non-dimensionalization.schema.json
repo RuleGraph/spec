@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rulegraph.org/schema/lawcard/v0.2/extensions/non-dimensionalization.schema.json",
+  "title": "LawCard Extension — nonDimensionalization",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "scales": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "dimensionless": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "notes": { "type": "string" }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rulegraph.org/schema/lawcard/v0.2/extensions/geometry.schema.json",
+  "title": "LawCard Extension — geometry",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "pairing": { "type": "string", "enum": ["all-pairs","neighbor-list","graph"] },
+    "cutoff": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": { "radius": { "type": "number" }, "unit": { "type": "string" } },
+      "required": ["radius","unit"]
+    },
+    "softening": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": { "epsilon": { "type": "number" }, "unit": { "type": "string" } },
+      "required": ["epsilon","unit"]
+    },
+    "periodicBox": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "L": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "type": "number" } },
+        "unit": { "type": "string" }
+      },
+      "required": ["L","unit"]
+    }
+  }
+}

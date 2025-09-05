@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rulegraph.org/schema/lawcard/v0.2/extensions/domains.schema.json",
+  "title": "LawCard Extension — domains (constraints)",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["where"],
+        "additionalProperties": false,
+        "properties": {
+          "targets":  { "type": "array", "items": { "type": "string" } },
+          "scope":    { "type": "array", "items": { "type": "string" } },
+          "where":    { "$ref": "https://rulegraph.org/schema/rg-ast/v1.2/rg-ast-v1.2.schema.json#/$defs/Node" },
+          "message":  { "type": "string" },
+          "severity": { "type": "string", "enum": ["warn","error"] },
+          "action":   { "type": "string", "enum": ["none","clip"] },
+          "note":     { "type": "string" }
+        }
+      }
+    }
+  }
+}

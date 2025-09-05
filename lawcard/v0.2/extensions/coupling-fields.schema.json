@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rulegraph.org/schema/lawcard/v0.2/extensions/coupling-fields.schema.json",
+  "title": "LawCard Extension — couplingFields",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "name": { "type": "string" },
+      "source": { "type": "string", "format": "uri" },
+      "interpolant": { "type": "string", "enum": ["nearest","linear","trilinear","cubic","spline","custom"] },
+      "unit": { "type": "string" },
+      "notes": { "type": "string" }
+    },
+    "required": ["name","source"]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rulegraph.org/schema/lawcard/v0.2/extensions/calibration.schema.json",
+  "title": "LawCard Extension — calibration",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "parameters": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "bounds": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "type": "number" } },
+          "prior": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "dist": { "type": "string", "enum": ["uniform","normal","lognormal","laplace"] },
+              "mu":   { "type": "number" },
+              "sigma":{ "type": "number" },
+              "low":  { "type": "number" },
+              "high": { "type": "number" }
+            },
+            "required": ["dist"]
+          }
+        }
+      }
+    },
+    "targets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "observable": { "type": "string" },
+          "unit": { "type": "string" },
+          "weight": { "type": "number" },
+          "notes": { "type": "string" }
+        },
+        "required": ["observable"]
+      }
+    }
+  }
+}

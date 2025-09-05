@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rulegraph.org/schema/lawcard/v0.2/extensions/numeric-hints.schema.json",
+  "title": "LawCard Extension — numericHints",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "sparsity": { "type": "string", "enum": ["dense","banded","block","unknown"] },
+    "suggestedIntegrator": { "type": "string", "enum": ["VelocityVerlet","RK45","ImplicitEuler","BDF","Custom"] },
+    "vectorWidth": { "type": "integer", "minimum": 1 }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rulegraph.org/schema/lawcard/v0.2/extensions/composition.schema.json",
+  "title": "LawCard Extension — composition",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "category": { "type": "string", "enum": ["force","constraint","source","potential","observer"] },
+    "priority": { "type": "integer" },
+    "accumulation": { "type": "string", "enum": ["sum","max","min","last"] },
+    "split": { "type": "string", "enum": ["None","Lie","Strang","ImplicitForce"] }
+  }
+}

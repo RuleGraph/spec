@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rulegraph.org/schema/lawcard/v0.2/extensions/contact-model.schema.json",
+  "title": "LawCard Extension — contactModel",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "restitution": { "type": "number", "minimum": 0, "maximum": 1 },
+    "friction": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "model": { "type": "string", "enum": ["Coulomb","Viscous","RegularizedCoulomb"] },
+        "mu": { "type": "number", "minimum": 0 },
+        "regularization": { "type": "number", "minimum": 0 }
+      },
+      "required": ["model"]
+    },
+    "notes": { "type": "string" }
+  }
+}
