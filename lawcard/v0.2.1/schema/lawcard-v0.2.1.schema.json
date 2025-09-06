@@ -60,7 +60,7 @@
           "astSha256": {
             "type": "string",
             "pattern": "^[0-9a-f]{64}$",
-            "description": "Optional atom-level hash: sha256 of the canonical AST node only."
+            "description": "atom-level hash: sha256 of the canonical AST node only."
           }
         }
       }

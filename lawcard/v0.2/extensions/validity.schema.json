@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rulegraph.org/schema/lawcard/v0.2/extensions/validity.schema.json",
+  "title": "LawCard Extension — validity",
+  "description": "Narrative applicability: named regimes with [min,max] ranges (author-chosen metric) and free-text assumptions.",
+  "type": "object",
+  "additionalProperties": false,
+
+  "properties": {
+    "regimes": {
+      "description": "Author-defined regime buckets keyed by name (e.g., 'linear', 'lowMach'). Ranges are descriptive, not enforced.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/Regime"
+      }
+    },
+
+    "assumptions": {
+      "description": "Plain-language assumptions that must hold for the law to be appropriate.",
+      "type": "array",
+      "items": { "type": "string" }
+    },
+
+    "notes": {
+      "description": "Optional extra guidance on applicability, caveats, or cross-refs.",
+      "type": "string"
+    }
+  },
+
+  "$defs": {
+    "Regime": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "desc": { "type": "string", "description": "Short human description of this regime." },
+        "min":  { "type": "number", "description": "Lower bound (inclusive) in the author-chosen metric." },
+        "max":  { "type": "number", "description": "Upper bound (inclusive) in the author-chosen metric." },
+        "metric": {
+          "type": "string",
+          "description": "Optional name of the metric used for the bounds (e.g., 'strain', 'Mach', 'Knudsen')."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Optional unit label for the metric when meaningful (e.g., 'unit:UNITLESS', 'unit:MACH')."
+        }
+      }
+    }
+  }
+}
