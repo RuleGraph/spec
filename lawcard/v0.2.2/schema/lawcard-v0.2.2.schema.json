@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rulegraph.org/schema/lawcard/v0.3/lawcard-v0.3.schema.json",
+  "title": "RuleGraph LawCard v0.2.2 (core)",
+  "type": "object",
+
+  "description": "Core contract for LawCard. The core execution-focused; all extras live in extensions. Hashing layers: equations[*].astSha256, coreSha256, cardSha256.",
+
+  "required": ["id","version","type","title","license","kind","symbols","parameters","equations","invariants"],
+  "additionalProperties": false,
+
+  "properties": {
+    "@context": { "type": ["string","object"] },
+
+    "id":      { "type": "string", "pattern": "^rg:law/.+\\.v\\d+$" },
+    "version": { "type": "string", "minLength": 1 },
+    "type":    { "type": "string", "const": "rg:LawCard" },
+    "title":   { "type": "string", "minLength": 1 },
+    "license": { "type": "string", "minLength": 1 },
+
+    "kind": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+
+    "symbols": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/SymbolMeta" }
+    },
+
+    "parameters": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/Parameter" }
+    },
+
+    "equations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["astProfile","ast","astSha256"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Deterministic equation identifier anchored to the card id.",
+            "pattern": "^rg:law/.+\\.v\\d+#eq/\\d+$"
+          },
+          "name":    { "type": "string" },
+          "machine": { "type": "string" },
+          "tex":     { "type": "string" },
+
+          "astProfile": { "type": "string", "const": "rg-ast/v1.2" },
+          "ast": {
+            "$ref": "https://rulegraph.org/schema/rg-ast/v1.2/rg-ast-v1.2.schema.json#/$defs/Node"
+          },
+
+          "astSha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "description": "SHA-256 of the canonicalized AST node only (atom hash)."
+          }
+        }
+      }
+    },
+
+    "invariants": {
+      "type": "object",
+      "required": ["conserves"],
+      "additionalProperties": false,
+      "properties": {
+        "conserves": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["Energy","LinearMomentum","AngularMomentum"] },
+          "minItems": 0
+        },
+        "dissipative": { "type": "boolean" },
+        "driftBudget": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["rel"],
+            "additionalProperties": false,
+            "properties": {
+              "rel": { "type": "number", "exclusiveMinimum": 0 }
+            }
+          }
+        },
+        "notes": { "type": "string" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "dissipative": { "const": true } }, "required": ["dissipative"] },
+          "then": { "properties": { "conserves": { "maxItems": 0 } } }
+        },
+        {
+          "if": { "not": { "properties": { "dissipative": { "const": true } } } },
+          "then": { "properties": { "conserves": { "minItems": 1 } } }
+        }
+      ]
+    },
+
+    "coreSha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "SHA-256 over the core view only: {id,version,type,title,license,kind,symbols,parameters,equations[id?,name?,astProfile,ast,astSha256],invariants} serialized with sorted keys & compact separators; excludes extensions and sha fields."
+    },
+
+    "cardSha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "SHA-256 over the entire published card (core + extensions), excluding this field and any digital signatures."
+    },
+
+    "stability":     { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/stability.schema.json" },
+    "testVectors":   { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/test-vectors.schema.json" },
+    "validity":      { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/validity.schema.json" },
+    "domains":       { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/domains.schema.json" },
+    "numericProfile":{ "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/numeric-profile.schema.json" },
+    "provenance":    { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/prov.schema.json" },
+    "references":    { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/references.schema.json" },
+    "signatures":    { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/signatures.schema.json" },
+    "schemaRefs":    { "$ref": "https://rulegraph.org/schema/lawcard/v0.2/extensions/schema-refs.schema.json" }
+  },
+
+  "patternProperties": {
+    "^x-": { "description": "Vendor/private extension area.", "type": ["object","array","string","number","boolean","null"] }
+  },
+
+  "$defs": {
+    "Dim": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "L": { "type": "integer" }, "M": { "type": "integer" }, "T": { "type": "integer" },
+        "I": { "type": "integer" }, "Θ": { "type": "integer" }, "N": { "type": "integer" }, "J": { "type": "integer" },
+        "Q": { "type": "integer" }
+      }
+    },
+
+    "SymbolMeta": {
+      "type": "object",
+      "required": ["kind","unit","dimension","role"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "type": "string", "enum": ["scalar","vector3","vector","matrix"] },
+        "unit": { "type": "string", "minLength": 1 },
+        "dimension": { "$ref": "#/$defs/Dim" },
+        "role": { "type": "string", "enum": ["parameter","state","state-or-input","intermediate","output","derived"] },
+        "shape": { "type": "array", "minItems": 1, "items": { "type": "integer", "minimum": 1 } },
+        "derivedFrom": { "type": "array", "items": { "type": "string" } },
+        "description": { "type": "string" },
+        "note": { "type": "string" }
+      }
+    },
+
+    "Parameter": {
+      "type": "object",
+      "required": ["value","unit"],
+      "additionalProperties": false,
+      "properties": {
+        "value": { "type": ["number","array","object"] },
+        "unit":  { "type": "string", "minLength": 1 },
+        "sigma": { "type": "number" },
+        "dimension": { "$ref": "#/$defs/Dim" },
+        "description": { "type": "string" }
+      }
+    }
+  }
+}
